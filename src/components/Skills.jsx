@@ -4,6 +4,11 @@ const SkillsStyle = styled.section`
   padding-top: 60px;
   padding-bottom: 80px;
   background-color: #fafafa;
+  .container {
+    h2 {
+      margin-bottom: 60px;
+    }
+  }
 `;
 
 const Skills = () => {
@@ -11,7 +16,7 @@ const Skills = () => {
     <>
       <SkillsStyle>
         <div className="container">
-          <h3>Skills</h3>
+          <h2>Skills</h2>
           <div className="wrapper">
             <div className="info frontend"></div>
             <div className="info backend"></div>

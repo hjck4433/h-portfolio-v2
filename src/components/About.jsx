@@ -10,7 +10,7 @@ const AboutStyle = styled.section`
   padding-top: 60px;
   padding-bottom: 80px;
   .container {
-    h3 {
+    h2 {
       margin-bottom: 60px;
     }
     .wrapper {
@@ -42,6 +42,9 @@ const AboutStyle = styled.section`
         .info {
           width: 100%;
           margin-bottom: 80px;
+          &:last-child {
+            margin-bottom: 0;
+          }
         }
       }
     }
@@ -53,7 +56,7 @@ const About = () => {
     <>
       <AboutStyle>
         <div className="container">
-          <h3>ABOUT</h3>
+          <h2>ABOUT</h2>
           <div className="wrapper">
             <div className="info name">
               <div className="icon">

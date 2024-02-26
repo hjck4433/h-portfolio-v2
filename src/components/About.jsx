@@ -8,7 +8,7 @@ import {
 
 const AboutStyle = styled.section`
   padding-top: 60px;
-  padding-bottom: 80px;
+  padding-bottom: 120px;
   .container {
     h2 {
       margin-bottom: 60px;

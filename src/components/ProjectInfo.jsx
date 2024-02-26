@@ -1,9 +1,20 @@
 import { styled } from "styled-components";
+import Modal from "./Modal";
+import { useState } from "react";
+import { marked } from "marked";
+import DOMPurify from "dompurify";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+
 const InfoStyle = styled.div`
   width: 100%;
   box-shadow: 1px 2px 3px 3px #eee;
   padding: 50px;
   border-radius: 10px;
+  margin-bottom: 80px;
   .name {
     margin-bottom: 30px;
     h3 {
@@ -20,18 +31,33 @@ const InfoStyle = styled.div`
     justify-content: space-between;
     .slideArea {
       width: 45%;
-      min-height: 500px;
-      background-color: pink;
+      .swiper {
+        .swiper-wrapper {
+          .slide {
+            .imgBox {
+              position: relative;
+              width: 100%;
+              padding-bottom: 100%;
+            }
+          }
+        }
+      }
     }
     .desc {
       width: 50%;
-      outline: 1px solid pink;
       .txt {
         min-height: 340px;
         background-color: aliceblue;
         padding-bottom: 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid #ccc;
+        p {
+          line-height: 1.4;
+          margin-bottom: 10px;
+          b {
+            font-weight: 600;
+          }
+        }
       }
       .box {
         .info {
@@ -54,12 +80,25 @@ const InfoStyle = styled.div`
           }
           .content {
             width: 80%;
+            line-height: 1.4;
+            a,
+            .qr {
+              color: royalblue;
+              font-weight: 600;
+              &:hover {
+                color: orange;
+              }
+            }
+            .qr {
+              cursor: pointer;
+              margin-top: 5px;
+            }
           }
           &.skills {
             .skillList {
               li {
                 display: inline-block;
-                line-height: 1.4;
+                line-height: 1.6;
                 margin-left: 5px;
               }
             }
@@ -79,64 +118,106 @@ const InfoStyle = styled.div`
   }
 `;
 
-const ProjectInfo = () => {
+const ImgComp = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url(${(props) => props.$imgUrl});
+  background-size: 100%;
+  background-position: top;
+  background-repeat: no-repeat;
+`;
+
+const ProjectInfo = ({ project }) => {
+  const htmlContent = marked(project.text);
+  const sanitizedHtml = DOMPurify.sanitize(htmlContent);
+  const createMarkup = () => {
+    return { __html: sanitizedHtml };
+  };
+
+  // modal
+  const [openModal, setModalOpen] = useState(false);
+  const closeModal = () => {
+    setModalOpen(false);
+  };
+
   return (
     <>
       <InfoStyle>
         <div className="name">
-          <h3 className="projectName">RepairRun</h3>
-          <p>2023.11.1 ~ 2023.12.1 (5人)</p>
+          <h3 className="projectName">{project.name}</h3>
+          <p>{project.duration}</p>
         </div>
 
         <div className="wrapper">
-          <div className="slideArea"></div>
+          <div className="slideArea">
+            <Swiper
+              slidesPerView={1}
+              modules={[Autoplay, Pagination, Navigation]}
+              loop={true}
+              navigation={true}
+              pagination={{ clickable: true }}
+              autoplay={true}
+              onAutoplay={{ delay: 3000 }}
+            >
+              {project.images.map((url, index) => (
+                <SwiperSlide className="slide" key={index}>
+                  <div className="imgBox">
+                    <ImgComp $imgUrl={url} />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          </div>
           <div className="desc">
-            <div className="txt"></div>
+            <div className="txt" dangerouslySetInnerHTML={createMarkup()}></div>
             <div className="box">
               <div className="info function">
                 <p className="title">주요 기능</p>
-                <p className="content">내용내용</p>
+                <p className="content">{project.function}</p>
               </div>
-              <div className="info link">
-                <p className="title">URL</p>
-                <div className="links content">
-                  <a href="javascript:(0)">링크링크</a>
+              {project.url !== "-" && (
+                <div className="info link">
+                  <p className="title">URL</p>
+                  <div className="links content">
+                    <a href={project.url} target="_blank">
+                      {project.url}
+                    </a>
+                    {project.qr && (
+                      <div
+                        className="qr"
+                        onClick={() => {
+                          setModalOpen(true);
+                        }}
+                      >
+                        PlayStore
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
+              )}
+
               <div className="info skills">
                 <p className="title">주요 기술</p>
                 <ul className="skillList content">
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
-                  <li>기술</li>
+                  {project.skills.map((skill) => (
+                    <li>{skill}</li>
+                  ))}
                 </ul>
               </div>
               <div className="info notion">
                 <p className="title">Notion</p>
-                <div className="notion">
-                  <a href="javascript:(0)">링크링크</a>
+                <div className="notion content">
+                  <a href={project.notion} target="blank_">
+                    프로젝트 상세
+                  </a>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </InfoStyle>
+      <Modal open={openModal} close={closeModal} children={project.qr} />
     </>
   );
 };

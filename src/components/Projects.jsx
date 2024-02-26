@@ -1,5 +1,6 @@
 import { styled } from "styled-components";
 import ProjectInfo from "./ProjectInfo";
+import projectList from "../data/projects";
 
 const ProjectsStyle = styled.section`
   padding-top: 60px;
@@ -19,7 +20,9 @@ const Projects = () => {
           <h2>Projects</h2>
 
           <div className="projectWrapper">
-            <ProjectInfo />
+            {projectList.map((project) => (
+              <ProjectInfo project={project} key={project.name} />
+            ))}
           </div>
         </div>
       </ProjectsStyle>

@@ -44,11 +44,12 @@ const GlobalStyle = createGlobalStyle`
   }
   .progress-bar {
     position: fixed;
+    z-index: 999;
     top: 80px;
     left: 0;
     right: 0;
     height: 6px;
-    background: yellow;
+    background: #CCE0FF;
     transform-origin: 0%;
     @media only screen and (max-width: 768px) {
       top: 40px;

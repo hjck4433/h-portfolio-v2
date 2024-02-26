@@ -1,5 +1,8 @@
 import { styled } from "styled-components";
 import Logo from "./Logo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { useMediaQuery } from "react-responsive";
 
 const HeaderComp = styled.header`
   width: 100%;
@@ -52,6 +55,9 @@ const HeaderComp = styled.header`
             color: royalblue;
           }
           a {
+            svg {
+              font-size: 1.6em;
+            }
             &:hover {
               color: orange;
             }
@@ -88,21 +94,46 @@ const HeaderComp = styled.header`
   }
 `;
 
-const Header = () => {
+const Header = ({ topRef, aboutRef, skillsRef, projectsRef }) => {
+  const isMobile = useMediaQuery({
+    query: "(max-width:768px)",
+  });
+
+  const scrollToRef = (ref) => {
+    if (ref.current) {
+      const elementPosition = ref.current.offsetTop;
+
+      const headerOffset = isMobile ? 44 : 84;
+
+      const offsetPosition = elementPosition - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  const scrollToTop = () => {
+    topRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
   return (
     <HeaderComp>
       <div className="container">
         <nav>
-          <div className="logo">
+          <div className="logo" onClick={() => scrollToTop()}>
             <Logo />
           </div>
           <ul>
-            <li>About</li>
-            <li>Skills</li>
-            <li>Projects</li>
+            <li onClick={() => scrollToRef(aboutRef)}>About</li>
+            <li onClick={() => scrollToRef(skillsRef)}>Skills</li>
+            <li onClick={() => scrollToRef(projectsRef)}>Projects</li>
             <li>
               <a href="https://github.com/hjck4433" target="_blank">
-                Git
+                {/* Git */}
+                {/* <FontAwesomeIcon icon={faSquareArrowUpRight} /> */}
+                <FontAwesomeIcon icon={faGithub} />
               </a>
             </li>
           </ul>

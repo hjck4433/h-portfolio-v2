@@ -34,8 +34,22 @@ const GlobalStyle = createGlobalStyle`
   .container {
     max-width: 1200px;
     margin: 0 auto;
+    height: 500px;
+      outline: 1px solid red;
     @media only screen and (max-width:1200px){
       padding: 0 20px;
+    }
+  }
+  .progress-bar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: yellow;
+    transform-origin: 0%;
+    @media only screen and (max-width: 768px) {
+      top: 40px;
     }
   }
   @media only screen and (max-width:768px) {
@@ -46,10 +60,13 @@ const GlobalStyle = createGlobalStyle`
       width: 90vw;
       padding: 0;
     }
+    main {
+      padding-top: 40px;
+    }
   }
   @media only screen and (max-width: 480px) {
     main {
-      
+  
     }
   }
 `;

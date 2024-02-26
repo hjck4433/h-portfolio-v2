@@ -28,14 +28,16 @@ const GlobalStyle = createGlobalStyle`
   a {
     text-decoration: none;
   }
+  h3 {
+    font-size: 2.8em;
+    font-weight: 600;
+  }
   main {
-    padding-top: 80px;
+    /* padding-top: 80px; */
   }
   .container {
     max-width: 1200px;
     margin: 0 auto;
-    height: 500px;
-      outline: 1px solid red;
     @media only screen and (max-width:1200px){
       padding: 0 20px;
     }
@@ -61,7 +63,7 @@ const GlobalStyle = createGlobalStyle`
       padding: 0;
     }
     main {
-      padding-top: 40px;
+      /* padding-top: 40px; */
     }
   }
   @media only screen and (max-width: 480px) {

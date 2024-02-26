@@ -8,6 +8,8 @@ const HeaderComp = styled.header`
   width: 100%;
   height: 80px;
   position: fixed;
+  backdrop-filter: blur(40px);
+  background-color: rgba(255, 255, 255, 0.7);
   top: 0;
   left: 0;
   border-bottom: 1px solid #ccc;

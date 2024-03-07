@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 import { useEffect, useState, useRef } from "react";
-import { motion, useAnimation, useScroll } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import introBg from "../images/bg_sky.jpg";
 
 const IntroStyle = styled.section`
@@ -73,7 +73,6 @@ const Intro = () => {
     const updateOpacities = () => {
       const progress = scrollYProgress.get();
 
-      // Adjust the opacity based on the progress within the Intro component
       const newFirstBoxOpacity = 1 - Math.min(progress / 0.5, 1);
       const newSecondBoxOpacity = Math.min((progress - 0.5) / 0.5, 1);
 
@@ -105,7 +104,7 @@ const Intro = () => {
                 style={{ opacity: secondBoxOpacity }}
                 transition={{ duration: 0.5 }}
               >
-                <p>기본에 충실한 탄탄한 기술 스택을 구축해나가는,</p>
+                <p>기본에 충실한 기술 스택을 구축해나가는,</p>
                 <p>항상 발전하며 성장하는 개발자를 목표로 하고 있습니다.</p>
               </motion.div>
             </div>

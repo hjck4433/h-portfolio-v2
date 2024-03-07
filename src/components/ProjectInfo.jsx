@@ -8,6 +8,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { motion } from "framer-motion";
 
 const InfoStyle = styled.div`
   width: 100%;
@@ -142,83 +143,102 @@ const ProjectInfo = ({ project }) => {
     setModalOpen(false);
   };
 
+  const varients = {
+    offscreen: { opacity: 0, y: 50 },
+    onscreen: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", bounce: 0.3, duration: 1.2 },
+    },
+  };
+
   return (
     <>
-      <InfoStyle>
-        <div className="name">
-          <h3 className="projectName">{project.name}</h3>
-          <p>{project.duration}</p>
-        </div>
-
-        <div className="wrapper">
-          <div className="slideArea">
-            <Swiper
-              slidesPerView={1}
-              modules={[Autoplay, Pagination, Navigation]}
-              loop={true}
-              navigation={true}
-              pagination={{ clickable: true }}
-              autoplay={true}
-              onAutoplay={{ delay: 3000 }}
-            >
-              {project.images.map((url, index) => (
-                <SwiperSlide className="slide" key={index}>
-                  <div className="imgBox">
-                    <ImgComp $imgUrl={url} />
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
+      <motion.div
+        initial="offscreen"
+        whileInView="onscreen"
+        viewport={{ once: true, amount: 0.5 }}
+        variants={varients}
+      >
+        <InfoStyle>
+          <div className="name">
+            <h3 className="projectName">{project.name}</h3>
+            <p>{project.duration}</p>
           </div>
-          <div className="desc">
-            <div className="txt" dangerouslySetInnerHTML={createMarkup()}></div>
-            <div className="box">
-              <div className="info function">
-                <p className="title">주요 기능</p>
-                <p className="content">{project.function}</p>
-              </div>
-              {project.url !== "-" && (
-                <div className="info link">
-                  <p className="title">URL</p>
-                  <div className="links content">
-                    <a href={project.url} target="_blank">
-                      {project.url}
-                    </a>
-                    {project.qr && (
-                      <div
-                        className="qr"
-                        onClick={() => {
-                          setModalOpen(true);
-                        }}
-                      >
-                        PlayStore
-                      </div>
-                    )}
-                  </div>
-                </div>
-              )}
 
-              <div className="info skills">
-                <p className="title">주요 기술</p>
-                <ul className="skillList content">
-                  {project.skills.map((skill) => (
-                    <li>{skill}</li>
-                  ))}
-                </ul>
-              </div>
-              <div className="info notion">
-                <p className="title">Notion</p>
-                <div className="notion content">
-                  <a href={project.notion} target="blank_">
-                    프로젝트 상세
-                  </a>
+          <div className="wrapper">
+            <div className="slideArea">
+              <Swiper
+                slidesPerView={1}
+                modules={[Autoplay, Pagination, Navigation]}
+                loop={true}
+                navigation={true}
+                pagination={{ clickable: true }}
+                autoplay={true}
+                onAutoplay={{ delay: 3000 }}
+              >
+                {project.images.map((url, index) => (
+                  <SwiperSlide className="slide" key={index}>
+                    <div className="imgBox">
+                      <ImgComp $imgUrl={url} />
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+            <div className="desc">
+              <div
+                className="txt"
+                dangerouslySetInnerHTML={createMarkup()}
+              ></div>
+              <div className="box">
+                <div className="info function">
+                  <p className="title">주요 기능</p>
+                  <p className="content">{project.function}</p>
+                </div>
+                {project.url !== "-" && (
+                  <div className="info link">
+                    <p className="title">URL</p>
+                    <div className="links content">
+                      <a href={project.url} target="_blank">
+                        {project.url}
+                      </a>
+                      {project.qr && (
+                        <div
+                          className="qr"
+                          onClick={() => {
+                            setModalOpen(true);
+                          }}
+                        >
+                          PlayStore
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                <div className="info skills">
+                  <p className="title">주요 기술</p>
+                  <ul className="skillList content">
+                    {project.skills.map((skill) => (
+                      <li>{skill}</li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="info notion">
+                  <p className="title">Notion</p>
+                  <div className="notion content">
+                    <a href={project.notion} target="blank_">
+                      프로젝트 상세
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </InfoStyle>
-      <Modal open={openModal} close={closeModal} children={project.qr} />
+        </InfoStyle>
+        <Modal open={openModal} close={closeModal} children={project.qr} />
+      </motion.div>
     </>
   );
 };

@@ -47,12 +47,12 @@ const InfoStyle = styled.div`
       width: 50%;
       .txt {
         min-height: 340px;
-        background-color: aliceblue;
+        /* background-color: aliceblue; */
         padding-bottom: 20px;
         margin-bottom: 20px;
         border-bottom: 1px solid #ccc;
         p {
-          line-height: 1.4;
+          line-height: 1.6;
           margin-bottom: 10px;
           b {
             font-weight: 600;
@@ -110,6 +110,7 @@ const InfoStyle = styled.div`
       flex-direction: column;
       .slideArea {
         width: 100%;
+        margin-bottom: 30px;
       }
       .desc {
         width: 100%;

@@ -143,6 +143,16 @@ const ProjectInfo = ({ project }) => {
     setModalOpen(false);
   };
 
+  const [swiperKey, setSwiperKey] = useState("swiperKey");
+  const [autoplay, setAutoplay] = useState(false);
+
+  const handleEnterViewport = () => {
+    if (!autoplay) {
+      setSwiperKey(`swiperKey-${Date.now()}`);
+      setAutoplay(true);
+    }
+  };
+
   const varients = {
     offscreen: { opacity: 0, y: 50 },
     onscreen: {
@@ -157,6 +167,7 @@ const ProjectInfo = ({ project }) => {
       <motion.div
         initial="offscreen"
         whileInView="onscreen"
+        onViewportEnter={handleEnterViewport}
         viewport={{ once: true, amount: 0.5 }}
         variants={varients}
       >
@@ -169,6 +180,7 @@ const ProjectInfo = ({ project }) => {
           <div className="wrapper">
             <div className="slideArea">
               <Swiper
+                key={swiperKey}
                 slidesPerView={1}
                 modules={[Autoplay, Pagination, Navigation]}
                 loop={true}

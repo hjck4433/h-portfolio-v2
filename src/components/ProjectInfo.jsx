@@ -104,6 +104,11 @@ const InfoStyle = styled.div`
               }
             }
           }
+          &.git {
+            li {
+              line-height: 1.6;
+            }
+          }
         }
       }
     }
@@ -235,6 +240,22 @@ const ProjectInfo = ({ project }) => {
                     {project.skills.map((skill) => (
                       <li>{skill}</li>
                     ))}
+                  </ul>
+                </div>
+                <div className="info git">
+                  <p className="title">GitHub</p>
+                  <ul className="github content">
+                    {project.github.map((git, index) => {
+                      const gitName = Object.keys(git)[0];
+                      const gitUrl = git[gitName];
+                      return (
+                        <li key={index}>
+                          <a href={gitUrl} target="_blank">
+                            {gitName}
+                          </a>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </div>
                 <div className="info notion">

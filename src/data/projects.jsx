@@ -65,6 +65,10 @@ const projectList = [
       "Elasticsearch/",
       "AWS",
     ],
+    github: [
+      { "프론트+백엔드": "https://github.com/hjck4433/finalprj_total_cinepic" },
+      { 플라스크: "https://github.com/hjck4433/finalprj_python_cinepic" },
+    ],
     notion:
       "https://hjck4433.notion.site/Project-Cinepic-0980a88679b649f686ae7a6343d87214",
   },
@@ -102,6 +106,13 @@ const projectList = [
       "AWS/",
       "Expo",
     ],
+    github: [
+      {
+        "프론트+백엔드":
+          "https://github.com/hjck4433/totalprj-movieverse-total",
+      },
+      { 플라스크: "https://github.com/Leejaewon2/movie_verse_python" },
+    ],
     notion:
       "https://hjck4433.notion.site/Project-RepairRun-ae275a8ce16047799facf9aea002175a?pvs=74",
   },
@@ -128,6 +139,10 @@ const projectList = [
       "빠르게 수선물을 수거하고 처리해주는 검증된 파트너를 매칭해주는 수선 매칭 서비스",
     url: "-",
     skills: ["HTML/", "SCSS/", "React/", "Spring Boot-JDBC/", "Oracle"],
+    github: [
+      { 프론트엔드: "https://github.com/hjck4433/miniprj-repairrun" },
+      { 백엔드: "https://github.com/hjck4433/kh-mini-repairrun-back" },
+    ],
     notion:
       "https://hjck4433.notion.site/Project-RepairRun-ae275a8ce16047799facf9aea002175a?pvs=74",
   },
@@ -145,6 +160,11 @@ const projectList = [
     function: "블리자드 메인페이지 및 로그인 페이지 카피",
     url: "https://imaginative-dusk-c76a08.netlify.app/",
     skills: ["HTML/", "SCSS/", "Javascript"],
+    github: [
+      {
+        클론코드: "https://github.com/hjck4433/project_copy_site",
+      },
+    ],
     notion:
       "https://hjck4433.notion.site/Blizzard-copysite-9476e1d78a4a4703badbd0d0ffbdc205",
   },

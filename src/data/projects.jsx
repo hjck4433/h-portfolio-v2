@@ -114,7 +114,7 @@ const projectList = [
       { 플라스크: "https://github.com/Leejaewon2/movie_verse_python" },
     ],
     notion:
-      "https://hjck4433.notion.site/Project-RepairRun-ae275a8ce16047799facf9aea002175a?pvs=74",
+      "https://hjck4433.notion.site/Project-MovieVerse-901d0fc59c3b4f938820ecaa9d055c68",
   },
   {
     name: "RepairRun",
